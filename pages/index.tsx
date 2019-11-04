@@ -1,27 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { SearchInput } from '../components/SearchInput'
 
-const StyledSpan = styled.div`
-  color: teal;
-  padding: 1rem;
-`
-
-export default () => (
-  <div>
-    <div
-      style={{
-        padding: '1rem',
-        background: 'lightgrey'
-      }}
-    >
-      <span className="title">My Title</span>
-      <StyledSpan>Some Styled span</StyledSpan>
+export default () => {
+  const [selectedOptions, setSelectedOptions] = useState<any[]>([])
+  return (
+    <div>
+      <SearchInput
+        onSelectedOption={(option: any) => {
+          setSelectedOptions([...selectedOptions, option])
+        }}
+      />
+      <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
     </div>
-    <style jsx>{`
-      .title {
-        color: rebeccapurple;
-        padding: 1rem;
-      }
-    `}</style>
-  </div>
-)
+  )
+}
