@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-import { Input, Wrapper, Cities, City, Result } from './elements'
+import {
+  Input,
+  Wrapper,
+  Cities,
+  City,
+  Result,
+  InputWrapper,
+  Tag
+} from './elements'
 
 interface Props {
   onSelectedOption: (arg1: any) => void
@@ -28,14 +36,20 @@ export const SearchInput: React.FC<Props> = () => {
     new Map()
   )
   const cities = useFetchCities(cityName)
-  // console.log()
+  const cityNames = Array.from(selectedCities.values()).map(el => el.name)
   return (
     <Wrapper>
-      <Input
-        onChange={e => {
-          setCityName(e.target.value)
-        }}
-      />
+      <InputWrapper>
+        {cityNames.map(name => (
+          <Tag>{name}</Tag>
+        ))}
+        <Input
+          autoFocus
+          onChange={e => {
+            setCityName(e.target.value)
+          }}
+        />
+      </InputWrapper>
       <Cities>
         {cities.map(city => {
           const { geonameid, name, country } = city
@@ -54,6 +68,8 @@ export const SearchInput: React.FC<Props> = () => {
         })}
       </Cities>
       <Result
+        readOnly
+        disabled
         value={Array.from(selectedCities.values())
           .map(city => city.name)
           .join(',')}

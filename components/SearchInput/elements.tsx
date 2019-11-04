@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 
 export const Input = styled.input`
-  width: 100%;
-  background: lightgrey;
-  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  flex: 1;
   padding: 0.5rem;
+  margin: 0.5rem;
 `
 
 export const Wrapper = styled.div`
@@ -17,7 +19,6 @@ export const Wrapper = styled.div`
 `
 
 export const Cities = styled.div`
-  font-size: 1.5rem;
   padding: 1rem;
 `
 
@@ -27,4 +28,17 @@ export const City = styled.div`
   cursor: pointer;
 `
 
-export const Result = styled.input``
+export const Result = styled.textarea``
+
+export const InputWrapper = styled.div`
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+`
+
+export const Tag = styled.span`
+  display: inline-block;
+  background-color: orange;
+  padding: 0.5rem;
+  margin: 0.5rem;
+`
