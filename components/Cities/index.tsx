@@ -20,6 +20,9 @@ export const Cities: React.FC<Props> = ({
     <CitiesWrapper>
       {cities.map(city => {
         const { geonameid, name, country } = city
+        if (selectedCities.has(geonameid)) {
+          return
+        }
         return (
           <City
             key={geonameid}

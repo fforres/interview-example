@@ -13,6 +13,7 @@ const useFetchCities = (
   useEffect(() => {
     // prevent first render run
     if (cityName.trim() === '') {
+      setResponse([])
       return
     }
     fetch(`http://localhost:3000/api/city?name=${cityName}`)
@@ -28,31 +29,53 @@ export const SearchInput: React.FC<Props> = () => {
     new Map()
   )
   const cities = useFetchCities(cityName)
-  const cityNames = Array.from(selectedCities.values()).map(el => el.name)
+  const citiesArray = Array.from(selectedCities.values())
+  // const cityNames = Array.from(selectedCities.values()).map(el => el.name)
   return (
     <Wrapper>
       <InputWrapper>
-        {cityNames.map(name => (
-          <Tag>{name}</Tag>
+        {citiesArray.map(city => (
+          <Tag
+            onClick={() => {
+              const newMap = new Map(selectedCities)
+              newMap.delete(city.geonameid)
+              setSelectedCities(newMap)
+            }}
+          >
+            {city.name}
+          </Tag>
         ))}
         <Input
           autoFocus
+          onKeyDown={e => {
+            const keysArrays = Array.from(selectedCities.keys())
+            if (
+              e.keyCode === 8 &&
+              keysArrays.length &&
+              cityName.trim() === ''
+            ) {
+              const latest = keysArrays[keysArrays.length - 1]
+              const newMap = new Map(selectedCities)
+              newMap.delete(latest)
+              setSelectedCities(newMap)
+            }
+          }}
           onChange={e => {
             setCityName(e.target.value)
           }}
         />
       </InputWrapper>
-      <Cities
-        cities={cities}
-        selectedCities={selectedCities}
-        setSelectedCities={setSelectedCities}
-      />
+      {cities.length !== 0 && (
+        <Cities
+          cities={cities}
+          selectedCities={selectedCities}
+          setSelectedCities={setSelectedCities}
+        />
+      )}
       <Result
         readOnly
         disabled
-        value={Array.from(selectedCities.values())
-          .map(city => city.name)
-          .join(',')}
+        value={citiesArray.map(city => city.name).join(',')}
       />
     </Wrapper>
   )

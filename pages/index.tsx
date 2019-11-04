@@ -11,7 +11,6 @@ export default () => {
           setSelectedOptions([...selectedOptions, option])
         }}
       />
-      <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
     </div>
   )
 }
