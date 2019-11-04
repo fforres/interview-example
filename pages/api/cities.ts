@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import Cities from '../../data/cities.json'
 
 export default async (_: NextApiRequest, res: NextApiResponse) => {
-  console.log(res)
-  res.json(JSON.stringify({ hi: 'world' }))
+  res.json(JSON.stringify(Cities))
 }
