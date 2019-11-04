@@ -24,4 +24,7 @@ export const Cities = styled.div`
 export const City = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 `
+
+export const Result = styled.input``
