@@ -1,16 +1,26 @@
 import React from 'react'
-// import styled from 'styled-components'
+import styled from 'styled-components'
+
+const StyledSpan = styled.div`
+  color: teal;
+  padding: 1rem;
+`
 
 export default () => (
   <div>
-    <span className="container"></span>
-    My page
+    <div
+      style={{
+        padding: '1rem',
+        background: 'lightgrey'
+      }}
+    >
+      <span className="title">My Title</span>
+      <StyledSpan>Some Styled span</StyledSpan>
+    </div>
     <style jsx>{`
-      .container {
-        margin: 50px;
-      }
-      p {
-        color: blue;
+      .title {
+        color: rebeccapurple;
+        padding: 1rem;
       }
     `}</style>
   </div>
