@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
-import {
-  Input,
-  Wrapper,
-  Cities,
-  City,
-  Result,
-  InputWrapper,
-  Tag
-} from './elements'
+import { Cities } from '../Cities'
+import { Input, Wrapper, Result, InputWrapper, Tag } from './elements'
 
 interface Props {
   onSelectedOption: (arg1: any) => void
@@ -50,23 +42,11 @@ export const SearchInput: React.FC<Props> = () => {
           }}
         />
       </InputWrapper>
-      <Cities>
-        {cities.map(city => {
-          const { geonameid, name, country } = city
-          return (
-            <City
-              key={geonameid}
-              onClick={() => {
-                setSelectedCities(
-                  new Map(selectedCities).set(geonameid, { ...city })
-                )
-              }}
-            >
-              {name} - <i>{country}</i>
-            </City>
-          )
-        })}
-      </Cities>
+      <Cities
+        cities={cities}
+        selectedCities={selectedCities}
+        setSelectedCities={setSelectedCities}
+      />
       <Result
         readOnly
         disabled
